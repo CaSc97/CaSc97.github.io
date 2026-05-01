@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EA1 Bilderkennung mit ml5</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Deep Learning · ESA1</p>
+        <h1>Bilderkennung mit ml5.js</h1>
+      </div>
+      <nav aria-label="Seitennavigation">
+        <a href="#klassifikation">Klassifikation</a>
+        <a href="#beispiele">Beispiele</a>
+        <a href="#dokumentation">Dokumentation</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <h2 id="intro-title">MobileNet klassifiziert Bilder direkt im Browser.</h2>
+          <p>
+            Um die Klassifikation zu starten, lade bitte entweder ein Bild hoch, ziehe es in die Ablagefläche oder wähle eins der Beispielbilder.
+            Die wahrscheinlichsten Klassifizierungen werden mit Konfidenzwerten visualisiert.
+          </p>
+        </div>
+        <div class="status-panel" aria-live="polite">
+          <span class="status-dot" id="model-dot"></span>
+          <span id="model-status">Modell wird geladen...</span>
+        </div>
+      </section>
+
+      <section id="klassifikation" class="workspace" aria-label="Bildklassifikation">
+        <div class="upload-zone" id="drop-zone">
+          <input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          <label for="file-input">
+            <span class="upload-icon" aria-hidden="true">+</span>
+            <strong>Bild auswählen oder hier ablegen</strong>
+            <span>Erlaubte Formate: PNG, JPEG, WebP oder GIF bis 8 MB</span>
+          </label>
+        </div>
+
+        <div class="preview-area">
+          <img id="preview-image" alt="Ausgewaehltes Bild fuer die Klassifikation">
+          <div class="empty-preview" id="empty-preview">Kein Bild ausgewählt</div>
+        </div>
+
+        <section class="results" aria-labelledby="results-title">
+          <div class="section-heading">
+            <h2 id="results-title">Ergebnisse</h2>
+            <span id="result-summary">Bereit für ein Bild</span>
+          </div>
+          <div id="result-bars" class="result-bars" aria-live="polite"></div>
+          <p class="hint" id="feedback">
+            MobileNet kennt vor allem Objektklassen aus ImageNet. Unklare oder sehr kleine Motive können unklare Treffer liefern.
+          </p>
+        </section>
+      </section>
+
+      <section id="beispiele" aria-labelledby="examples-title">
+        <div class="section-heading">
+          <h2 id="examples-title">Beispielbilder</h2>
+          <span>Zum schnellen Testen</span>
+        </div>
+        <div class="examples" id="examples"></div>
+      </section>
+
+      <section id="dokumentation" class="documentation" aria-labelledby="doc-title">
+        <h2 id="doc-title">Dokumentation</h2>
+        <div class="doc-grid">
+          <article>
+            <h3>Ansatz</h3>
+            <p>
+              Die Anwendung verwendet den vortrainierten MobileNet-Classifier aus dem vorgegebenen ml5.js.
+              Die Bilder werden im Browser angezeigt und danach klassifiziert.
+            </p>
+          </article>
+          <article>
+            <h3>Interaktion und UX</h3>
+            <p>
+              Upload, Drag-and-drop und Beispielauswahl decken verschiedene Nutzungswege ab.
+              Statusmeldungen, Fehlermeldungen und Ergebnisbalken geben direktes Feedback.
+            </p>
+          </article>
+          <article>
+            <h3>Fehlerbehandlung</h3>
+            <p>
+              Die Dateiauswahl akzeptiert gängige Bildformate und begrenzt Uploads auf
+              8 MB. Nicht passende Dateien werden mit einer klaren Meldung abgelehnt.
+            </p>
+          </article>
+          <article>
+            <h3>Quellen</h3>
+            <p>
+              ml5.js 0.12.2, MobileNet/ImageNet und frei abrufbare Beispielbilder von Wikimedia Commons.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>ESA1 · Bilderkennung mit ml5.js</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
