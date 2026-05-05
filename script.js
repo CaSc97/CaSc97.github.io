@@ -3,6 +3,10 @@ const VALID_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 const sampleImages = [
   {
+    label: "Antarktis",
+    url: "Pics/antarktis.png"
+  },
+  {
     label: "Golden Retriever",
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/640px-Golden_Retriever_Dukedestiny01_drvd.jpg"
   },
@@ -50,9 +54,11 @@ function setFeedback(message, isError = false) {
 
 function renderExamples() {
   const cards = sampleImages.map((sample, index) => {
+    const crossOrigin = sample.url.startsWith("http") ? ' crossorigin="anonymous"' : "";
+
     return `
       <button class="example-card" type="button" data-index="${index}">
-        <img crossorigin="anonymous" src="${sample.url}" alt="${sample.label}">
+        <img${crossOrigin} src="${sample.url}" alt="${sample.label}">
         <span>${sample.label}</span>
       </button>
     `;
@@ -78,7 +84,12 @@ function validateFile(file) {
 }
 
 function showImage(src, alt) {
-  previewImage.crossOrigin = "anonymous";
+  if (src.startsWith("http")) {
+    previewImage.crossOrigin = "anonymous";
+  } else {
+    previewImage.removeAttribute("crossorigin");
+  }
+
   previewImage.src = src;
   previewImage.alt = alt;
   emptyPreview.classList.add("hidden");
